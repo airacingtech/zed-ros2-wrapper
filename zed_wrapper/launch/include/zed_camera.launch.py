@@ -11,6 +11,8 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
+    
+    wrapper_dir = get_package_share_directory('zed_wrapper')
 
     # Launch configuration variables
     svo_path = LaunchConfiguration('svo_path')
