@@ -4,6 +4,8 @@
 
 #### **Note:** if you are searching for a version of the ROS2 wrapper running on an Nvidia Jetson based on Ubuntu 18.04 that does not require recompiling ROS2 from source, please check out the `eloquent` branch, the official ROS2 version running on Ubuntu 18.04.
 
+#### **Note:** The branch `eloquent` is active and will be maintained and updated until Nvidia will release a Jetpack for the Jetson embedded boards based on Ubuntu 20.04. ROS2 Eloquent Elusor reached EOL in November 2020 and it will no more receive any update from ROS2 developers. You can get the latest version of the ZED ROS2 wrapper for the current stable version of ROS2 in the `master` branch.
+
 This package lets you use the ZED stereo cameras with ROS2. It provides access to the following data:
 
   - Left and right rectified/unrectified images
@@ -11,8 +13,13 @@ This package lets you use the ZED stereo cameras with ROS2. It provides access t
   - Colored 3D point cloud
   - Position and Mapping
   - Sensors data (not available with ZED)
+<<<<<<< HEAD
   - Detected objects (not available with ZED and ZED Mini)
   - Persons skeleton (not available with ZED and ZED Mini)
+=======
+  - Detected objects (Not available with ZED and ZED Mini)
+  - Persons skeleton (Not available with ZED and ZED Mini)
+>>>>>>> f0e17cb454b63d3a0a3468dcddabdeabc275c24a
 
 [More information](https://www.stereolabs.com/docs/ros2/getting-started/)
 
@@ -63,7 +70,7 @@ To install the **zed_ros2_wrapper**, open a bash terminal, clone the package fro
 
 ```bash
 $ cd ~/ros2_ws/src/ #use your current ros2 workspace folder
-$ git clone  --recursive https://github.com/stereolabs/zed-ros2-wrapper.git
+$ git clone  --recursive https://github.com/wuxiaohua1011/zed-ros2-wrapper.git
 $ cd ..
 $ rosdep install --from-paths src --ignore-src -r -y
 $ colcon build --symlink-install --cmake-args=-DCMAKE_BUILD_TYPE=Release
@@ -78,6 +85,16 @@ $ source ~/.bashrc
 **Note:** The option `--symlink-install` is very important, it allows to use symlinks instead of copying files to the ROS2 folders during the installation, where possible. Each package in ROS2 must be installed and all the files used by the nodes must be copied into the installation folders. Using symlinks allows you to modify them in your workspace, reflecting the modification during the next executions without the needing to issue a new `colcon build` command. This is true only for all the files that don't need to be compiled (Python scripts, configurations, etc.).
 
 **Note:** If you are using a different console interface like zsh, you have to change the `source` command as follows: `echo source $(pwd)/install/local_setup.zsh >> ~/.zshrc` and `source ~/.zshrc`.
+
+
+#### Temporary fix for image-transport
+There is a bug with image transport for Foxy as indicated at ["this link"](https://github.com/stereolabs/zed-ros2-wrapper#image-transport-and-topic-subscriptions)
+
+
+The solution that worked for me is stated in the aforementioned link, but listed here again:
+1. Download image-transport v3.0.0
+2. drag the downloaded content into your ws/src
+3. colcon build --symlink-install 
 
 #### Update the local repository
 
